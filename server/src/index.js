@@ -11,10 +11,12 @@ const run = async () => {
     const logger = createLoggerFactory(config.logger)
     const l = logger(module)
 
+    l.info('starting storage')
     const storage = await storageFactory(config.storage, logger)
 
-
+    l.info('starting app')
     const wallet = walletManager(config.wallet, logger, storage)
+    
     l.info('starting api server')
     const api = await apiServer(config.api, logger, wallet)
 }

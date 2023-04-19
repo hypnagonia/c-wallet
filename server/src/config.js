@@ -8,7 +8,9 @@ const getConfig = (envPath) => {
             passphraseSalt: process.env.PASSPHRASE_SALT,
             rpc: {
                 url: process.env.RPC_URL
-            }
+            },
+            gasLimit: 60000,
+            gasPrice: 100
         },
         api: {
             port: +process.env.API_PORT || 3000,

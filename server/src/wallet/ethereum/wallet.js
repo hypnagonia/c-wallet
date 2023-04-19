@@ -1,8 +1,7 @@
 const ethers = require('ethers')
-const { rpcHttpClient } = require('./rpcHttpClient')
 
 const ethereumWallet = (config, logger) => {
-    const client = rpcHttpClient(config.rpc)
+    const rpcClient = new ethers.JsonRpcProvider(config.rpc.url)
 
     const createWallet = () => {
         const wallet = ethers.Wallet.createRandom()
@@ -17,16 +16,44 @@ const ethereumWallet = (config, logger) => {
             throw new Error(`ethereum hex address expected, got ${address}`)
         }
 
-        const hexBalance = await client.getBalance(address)
-        return BigInt(hexBalance).toString()
+        const balance = await rpcClient.getBalance(address)
+        return balance.toString()
     }
 
-    const sign = (privateKey, payload) => { }
+    const sign = async (privateKey, payload) => {
+        const w = new ethers.Wallet(privateKey)
+        const bytes = ethers.toUtf8Bytes(payload)
+        const digest = ethers.keccak256(bytes)
+        const signature = await w.signMessage(digest)
+
+        return signature
+    }
+
+    const sendTransaction = async (privateKey, amount, to, data = '0x') => {
+        if (!ethers.isAddress(to)) {
+            throw new Error(`ethereum hex address expected, got ${to}`)
+        }
+
+        const w = new ethers.Wallet(privateKey, rpcClient)
+
+        // todo estimate gas price
+        const transaction = {
+            gasLimit: config.gasLimit,
+            gasPrice: ethers.parseUnits(config.gasPrice.toString(), 'gwei'),
+            to: '0x1234567890123456789012345678901234567890',
+            value: ethers.parseEther(amount),
+            data
+        }
+        
+        const res = await w.sendTransaction(transaction)
+        return res.hash
+    }
 
     return {
         createWallet,
         getBalance,
-        sign
+        sign,
+        sendTransaction
     }
 }
 

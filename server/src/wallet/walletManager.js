@@ -1,9 +1,10 @@
 const { ethereumWallet } = require('./ethereum/wallet')
+const { encrypt, decrypt } = require('../util/encryption')
 
 /* 
 note
 wallet manager is blockchain agnostic and knows less as possible about platform specifics
-glues storage, wallet, and normalized user creds from controllers only
+glues storage, encryption, wallet, and normalized inputs from api controllers
 */
 
 const walletManager = (config, logger, storage) => {
@@ -12,7 +13,7 @@ const walletManager = (config, logger, storage) => {
         throw new Error('passphrase salt is not set')
     }
 
-    const generatePassphrase = (userId) => {
+    const getPassphrase = (userId) => {
         return config.passphraseSalt + userId
     }
 
@@ -21,7 +22,7 @@ const walletManager = (config, logger, storage) => {
     const getWallet = async (userId) => {
         // todo
         const w = await storage.getWallet(userId)
-        return w
+        return w.address
     }
 
     const getBalance = (userId) => {
@@ -32,18 +33,32 @@ const walletManager = (config, logger, storage) => {
     const createWallet = async (userId) => {
         const w = wallet.createWallet()
         const address = w.address
-        
-        // todo encrypt
-        await storage.saveWallet(userId, w)
+        const passphrase = getPassphrase(userId)
+        const { encryptedData, salt } = await encrypt(passphrase, w.privateKey)
+
+        const data = {
+            address,
+            encryptedData,
+            salt
+        }
+        await storage.saveWallet(userId, data)
         return address
     }
 
-    const signPayload = (userId, payload) => {
-
+    const signPayload = async (userId, payload) => {
+        const w = await storage.getWallet(userId)
+        const passphrase = getPassphrase(userId)
+        const privateKey = await decrypt(passphrase, w.salt, w.encryptedData)
+        const signature = await wallet.sign(privateKey, payload)
+        return signature
     }
 
-    const sendTransaction = (userId, amount, payload) => {
-
+    const sendTransaction = async (userId, amount, to, payload) => {
+        const w = await storage.getWallet(userId)
+        const passphrase = getPassphrase(userId)
+        const privateKey = await decrypt(passphrase, w.salt, w.encryptedData)
+        const transactionHash = await wallet.sendTransaction(privateKey, amount, to, payload)
+        return transactionHash
     }
 
     return {
