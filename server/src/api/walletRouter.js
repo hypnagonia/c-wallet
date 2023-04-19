@@ -6,9 +6,10 @@ const walletRouter = (logger, wallet) => {
     const getBalance = async (req, res, next) => {
         const { strategyId } = req.params
         const { search } = req.query
+        const userId = 'abc'
 
         // note it is go-through query, nice to cache for short time
-        const balance = await wallet.getBalance()
+        const balance = await wallet.getBalance(userId)
 
         res.json({ balance })
     }

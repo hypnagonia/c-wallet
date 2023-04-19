@@ -20,14 +20,14 @@ const walletManager = (config, logger, storage) => {
     const wallet = ethereumWallet(config, logger)
 
     const getWallet = async (userId) => {
-        // todo
-        const w = await storage.getWallet(userId)
-        return w.address
+        const { address } = await storage.getWallet(userId)
+        return address
     }
 
-    const getBalance = (userId) => {
-        // todo
-        return wallet.getBalance('0xa5241513da9f4463f1d4874b548dfbac29d91f34')
+    const getBalance = async (userId) => {
+        const { address } = await storage.getWallet(userId)
+        const balance = await wallet.getBalance(address)
+        return balance
     }
 
     const createWallet = async (userId) => {
