@@ -6,7 +6,6 @@ const { storageFactory } = require('./storage')
 
 const run = async () => {
     global.fetch = (await import('node-fetch')).default // ugly stuff already regretting not using ts
-    console.log(global.fetch)
 
     const config = getConfig()
     const logger = createLoggerFactory(config.logger)
@@ -15,12 +14,9 @@ const run = async () => {
     const storage = await storageFactory(config.storage, logger)
 
 
-
     const wallet = walletManager(config.wallet, logger, storage)
     l.info('starting api server')
     const api = await apiServer(config.api, logger, wallet)
-
-
 }
 
 run()

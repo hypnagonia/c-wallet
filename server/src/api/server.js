@@ -15,6 +15,10 @@ const server = async (apiConfig, logger, wallet) => {
     api.use(cors())
     api.use(bodyParser.json())
     api.disable('x-powered-by')
+    api.use((req, res, next) => {
+        l.debug(`${req.method} ${req.path}`)
+        next()
+    })
 
     api.use('/api', walletRouter(logger, wallet))
 

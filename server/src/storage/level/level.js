@@ -12,16 +12,16 @@ const levelStorage = async (config, logger) => {
     }
 
     const get = async (key) => {
-        return db.get(key)
+        return await db.get(key)
     }
 
-    const set = async (key) => {
-        return db.put(key, value)
+    const put = async (key, value) => {
+        return await db.put(key, value)
     }
 
     return {
         get,
-        set
+        put
     }
 }
 

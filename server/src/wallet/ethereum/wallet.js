@@ -9,7 +9,7 @@ const ethereumWallet = (config, logger) => {
         // delete as we are never going to use it in the future
         delete wallet.mnemonic
 
-        return { wallet: wallet.address, privateKey: wallet.privateKey }
+        return { address: wallet.address, privateKey: wallet.privateKey }
     }
 
     const getBalance = async (address) => {

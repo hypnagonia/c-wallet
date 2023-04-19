@@ -3,15 +3,9 @@ const dotenv = require('dotenv')
 const getConfig = (envPath) => {
     dotenv.config({ path: envPath })
 
-    const passphraseSalt = process.env.PASSPHRASE_SALT
-
-    if (!passphraseSalt) {
-        throw new Error('PASSPHRASE_SALT env var is not set')
-    }
-
     const config = {
         wallet: {
-            passphraseSalt,
+            passphraseSalt: process.env.PASSPHRASE_SALT,
             rpc: {
                 url: process.env.RPC_URL
             }
