@@ -4,14 +4,14 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const { walletRouter } = require('./walletRouter')
 
-const server = async (apiConfig, logger) => {
+const server = async (apiConfig, logger, wallet) => {
     const l = logger(module, 'api')
     const api = express()
     api.use(cors())
     api.use(bodyParser.json())
     api.disable('x-powered-by')
 
-    api.use('/api', walletRouter)
+    api.use('/api', walletRouter(logger, wallet))
 
     const close = () => server.close()
 

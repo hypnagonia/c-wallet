@@ -1,6 +1,5 @@
 const zerg = require('zerg').default
 const { consoleNodeColorful } = require('zerg/dist/transports')
-const { config } = require('../config')
 
 function handler(logMessage) {
     const date = new Date().toISOString()

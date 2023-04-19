@@ -1,22 +1,35 @@
 const { Response, Request, Router, NextFunction } = require('express')
-const walletRouter = Router({ mergeParams: true })
-
-walletRouter.get('/balance', getBalance)
 
 
-async function getBalance(
-    req,
-    res,
-    next
-) {
-    const { strategyId } = req.params
-    const { search } = req.query
+const walletRouter = (logger, wallet) => {
+    const walletRouter = Router({ mergeParams: true })
 
-    res.json({ hello: 'hello' })
+    const getBalance = async (req, res, next) => {
+        const { strategyId } = req.params
+        const { search } = req.query
+
+        const w = wallet.createWallet()
+
+        res.json({ wallet: w })
+    }
+
+    const createWallet = async (req, res, next) => {
+        const { strategyId } = req.params
+        const { search } = req.query
+
+        const w = wallet.createWallet()
+
+        res.json({ wallet: w })
+    }
+
+
+    walletRouter.get('/balance', getBalance)
+    walletRouter.get('/create', createWallet)
+
+    return walletRouter
 }
 
 module.exports = {
     walletRouter
 }
-
 
