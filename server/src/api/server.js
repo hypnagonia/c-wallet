@@ -4,6 +4,11 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const { walletRouter } = require('./walletRouter')
 
+// todo
+// catch errs
+// validate inputs
+// auth guard
+
 const server = async (apiConfig, logger, wallet) => {
     const l = logger(module, 'api')
     const api = express()

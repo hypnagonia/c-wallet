@@ -8,22 +8,20 @@ const walletRouter = (logger, wallet) => {
         const { strategyId } = req.params
         const { search } = req.query
 
-        const w = wallet.createWallet()
+        const balance = await wallet.getBalance()
 
-        res.json({ wallet: w })
+        res.json({ balance })
     }
 
     const createWallet = async (req, res, next) => {
-        const { strategyId } = req.params
-        const { search } = req.query
-
         const w = wallet.createWallet()
 
         res.json({ wallet: w })
     }
 
-
+    // todo why dont i make all of them post and not get
     walletRouter.get('/balance', getBalance)
+    // todo must be post
     walletRouter.get('/create', createWallet)
 
     return walletRouter
