@@ -103,4 +103,6 @@ dist
 .vscode
 *.iml
 .env
+db
+
 

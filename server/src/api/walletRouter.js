@@ -1,6 +1,5 @@
 const { Response, Request, Router, NextFunction } = require('express')
 
-
 const walletRouter = (logger, wallet) => {
     const walletRouter = Router({ mergeParams: true })
 
@@ -17,6 +16,12 @@ const walletRouter = (logger, wallet) => {
         const w = wallet.createWallet()
 
         res.json({ wallet: w })
+    }
+
+    const signPayload = async (req, res, next) => {
+    }
+
+    const sendTransaction = async (req, res, next) => {
     }
 
     // todo why dont i make all of them post and not get

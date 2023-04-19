@@ -20,7 +20,10 @@ const getConfig = (envPath) => {
             port: +process.env.API_PORT || 3000,
             auth: {}
         },
-        storage: {},
+        storage: {
+            location: './db',
+            createIfMissing: true
+        },
         logger: {
             levels: ['error', 'info', 'warn', 'debug']
         }

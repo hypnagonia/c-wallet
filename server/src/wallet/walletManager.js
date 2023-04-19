@@ -28,14 +28,14 @@ const walletManager = (config, logger, storage) => {
 
     }
 
-    const sendBalance = (userId) => {
+    const sendTransaction = (userId, amount, payload) => {
 
     }
 
     return {
         createWallet,
         signPayload,
-        sendBalance,
+        sendTransaction,
         getBalance
     }
 }
