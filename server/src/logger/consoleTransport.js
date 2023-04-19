@@ -8,9 +8,9 @@ function handler(logMessage) {
     return logMessage
 }
 
-const consoleTransport = zerg.createListener({
+const consoleTransport = config => zerg.createListener({
     handler: (...args) => consoleNodeColorful(handler(...args)),
-    levels: config.logger.levels,
+    levels: config.levels,
 })
 
 module.exports = { consoleTransport }
