@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const { catchAsync, isAddress, isAmount, isPayload, internalError } = require('./util')
 
+// todo better error handling
 const walletRouter = (logger, wallet) => {
     const l = logger(module, 'walletRouter')
     const walletRouter = Router({ mergeParams: true })
