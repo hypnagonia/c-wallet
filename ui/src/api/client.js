@@ -3,7 +3,6 @@ import { backendUrl, getWindowParam } from '../util'
 const tokenFromGetParam = getWindowParam('token')
 const saveToken = token => localStorage.setItem('token', token)
 const getToken = () => localStorage.getItem('token')
-console.log({ tokenFromGetParam })
 
 if (tokenFromGetParam) {
 	saveToken(tokenFromGetParam)
@@ -32,7 +31,7 @@ const processResponse = (r) => {
 	if (r.status === 401) {
 		logout()
 	}
-	console.log(r.status)
+	
 	return r.json()
 }
 
