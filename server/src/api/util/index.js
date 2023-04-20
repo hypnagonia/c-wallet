@@ -1,14 +1,17 @@
-const { Router } = require('express')
 const ethers = require('ethers')
-
 const internalError = 'Internal Error'
+
 const catchAsync = log => f => {
   return async (req, res, next) => {
     try {
       await f(req, res, next)
-    } catch (err) {
-      log.error(err)
-      next(err ? err.message || err : internalError)
+    } catch (error) {
+      log.error(error)
+      // todo set status codes to 400 or 500 to indicate the source of the error
+      res.status(500)
+      const e = error ? error.message || error : internalError
+      res.json({ error: e })
+      next(e)
     }
   }
 }
