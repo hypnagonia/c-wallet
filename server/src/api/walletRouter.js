@@ -5,8 +5,6 @@ const walletRouter = (logger, wallet) => {
     const walletRouter = Router({ mergeParams: true })
 
     const getBalance = async (req, res, next) => {
-        const { strategyId } = req.params
-        const { search } = req.query
         const userId = 'abc'
 
         // note it is go-through query, nice to cache for short time
