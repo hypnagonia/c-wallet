@@ -32,10 +32,8 @@ export const SendTransaction = () => {
 
     if (result) {
         return <>
-            <div className="box">
-                Transaction Hash
-            </div>
-            <div className="box">
+            <div className="box small">
+                Transaction Hash<br />
                 {result}<br />
                 <a href={getBlockExplorerTransactionLink(result)} target='_blank'>See on block explorer</a>
             </div>

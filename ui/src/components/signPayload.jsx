@@ -20,10 +20,8 @@ export const SignPayload = () => {
 
     if (signature) {
         return <>
-            <div className="box">
-                Signature
-            </div>
-            <div className="box">
+            <div className="box small">
+                Signature<br/>
                 {signature}
             </div>
             <div>
