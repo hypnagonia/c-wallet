@@ -24,7 +24,7 @@ const walletRouter = (logger, wallet) => {
 
     const signPayload = async (req, res, next) => {
         const userId = 'abc'
-        const payload = 'abc'
+        const { payload } = req.body
         const signature = await wallet.signPayload(userId, payload)
 
         res.json({ signature })
@@ -39,24 +39,17 @@ const walletRouter = (logger, wallet) => {
 
     const sendTransaction = async (req, res, next) => {
         const userId = 'abc'
-        const amount = '1'
-        const payload = '0x'
-        const to = '0xf3f64384cd47ccdb39392024791d84905e63a94e'
-        const transactionHash = await wallet.sendTransaction(userId, amount, to, payload)
+        const { recipient, amount, payload } = req.body
+        const transactionHash = await wallet.sendTransaction(userId, amount, recipient, payload)
 
         res.json({ transactionHash })
     }
 
-    // todo why dont i make all of them post and not get
-    walletRouter.get('/balance', catchAsync(getBalance))
-    // todo must be post
-    walletRouter.get('/create', catchAsync(createWallet))
-    // todo must be post
-    walletRouter.get('/sign', catchAsync(signPayload))
-    // todo must be post
-    walletRouter.get('/send', catchAsync(sendTransaction))
-    // to do replace id with auth
-    walletRouter.get('/', catchAsync(getWallet))
+    walletRouter.post('/balance', catchAsync(getBalance))
+    walletRouter.post('/create', catchAsync(createWallet))
+    walletRouter.post('/sign', catchAsync(signPayload))
+    walletRouter.post('/send', catchAsync(sendTransaction))
+    walletRouter.post('/', catchAsync(getWallet))
 
     return walletRouter
 }

@@ -19,6 +19,9 @@ describe('wallet manager', () => {
         // set up a database connection before running the tests
         storage = await storageFactory(config.storage, logger)
         wm = walletManager(config.wallet, logger, storage)
+    })
+
+    afterAll(async () => {
         await storage.deleteAll()
     })
 

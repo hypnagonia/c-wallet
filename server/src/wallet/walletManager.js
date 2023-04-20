@@ -30,6 +30,11 @@ const walletManager = (config, logger, storage) => {
     }
 
     const createWallet = async (userId) => {
+        const savedWallet = getWallet(userId)
+        if (savedWallet) {
+            return savedWallet
+        }
+        
         const w = wallet.createWallet()
         const address = w.address
         const passphrase = getPassphrase(userId)
@@ -52,11 +57,12 @@ const walletManager = (config, logger, storage) => {
         return signature
     }
 
-    const sendTransaction = async (userId, amount, to, payload) => {
+    const sendTransaction = async (userId, amount, recipient, payload) => {
         const w = await storage.getWallet(userId)
         const passphrase = getPassphrase(userId)
         const privateKey = await decrypt(passphrase, w.salt, w.encryptedData)
-        const transactionHash = await wallet.sendTransaction(privateKey, amount, to, payload)
+
+        const transactionHash = await wallet.sendTransaction(privateKey, amount, recipient, payload)
         return transactionHash
     }
 
