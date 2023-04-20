@@ -102,7 +102,7 @@ const keyFromPassword = async (
     {
       name: 'PBKDF2',
       salt: saltBuffer,
-      iterations: 10000,
+      iterations: 350000,
       hash: 'SHA-256',
     },
     key,
