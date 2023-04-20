@@ -7,10 +7,10 @@ import { backendUrl } from '../util'
 export const Wallet = () => {
     const [balance, setBalance] = useState(undefined)
     const [wallet, setWallet] = useState(undefined)
-    const [authorized, setAuthorized] = useState(api.isAuthorized())
+    const isAuthorized = api.isAuthorized()
 
     useEffect(() => {
-        if (!authorized) {
+        if (!isAuthorized) {
             return
         }
 
@@ -23,7 +23,7 @@ export const Wallet = () => {
     }, [wallet])
 
     useEffect(() => {
-        if (!authorized) {
+        if (!isAuthorized) {
             return
         }
 
@@ -38,7 +38,7 @@ export const Wallet = () => {
 
     const displayedBalance = balance ? ethers.formatEther(balance) : '-'
 
-    if (!authorized) {
+    if (!isAuthorized) {
         return <>
             <div>
                 <a href={`${backendUrl}/auth/google`}>
