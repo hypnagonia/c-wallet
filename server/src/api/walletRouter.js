@@ -8,7 +8,7 @@ const walletRouter = (logger, wallet) => {
     const getBalance = async (req, res, next) => {
         const userId = req.user
         
-        // todo it is go-through query, nice to cache for short time
+        // todo it is go-through query, nice to cache for a short time
         const balance = await wallet.getBalance(userId)
 
         res.json({ balance })

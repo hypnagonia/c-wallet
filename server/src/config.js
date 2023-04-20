@@ -15,7 +15,10 @@ const getConfig = (envPath) => {
         api: {
             port: +process.env.API_PORT || 3001,
             auth: {
-                jwtSecret: process.env.JWT_SECRET,
+                jwt: {
+                    secret: process.env.JWT_SECRET,
+                    expiresIn: '24h',
+                },
                 frontendCallbackUrl: process.env.FRONTEND_URL,
                 google: {
                     clientID: process.env.GOOGLE_AUTH_CLIENT_ID,

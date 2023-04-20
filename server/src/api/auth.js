@@ -14,7 +14,7 @@ passport.deserializeUser((o, cb) => {
 const auth = (api, config) => {
     api.use(passport.initialize())
     const jwtOptions = {
-        secretOrKey: config.jwtSecret,
+        secretOrKey: config.jwt.secret,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
     }
 
@@ -40,7 +40,7 @@ const auth = (api, config) => {
     api.get('/auth/google/callback',
         passport.authenticate('google', { session: false }),
         (req, res) => {
-            const token = jwt.sign({ userId: req.user }, config.jwtSecret, { expiresIn: '24h' })
+            const token = jwt.sign({ userId: req.user }, config.jwt.secret, { expiresIn: config.jwt.expiresIn })
             res.redirect(config.frontendCallbackUrl + `?token=${token}`)
         })
 
