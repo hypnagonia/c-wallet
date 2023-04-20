@@ -30,7 +30,6 @@ const generateSalt = (byteCount = 32) => {
   return b64encoded
 }
 
-
 const DERIVED_KEY_FORMAT = 'AES-GCM'
 const STRING_ENCODING = 'utf-8'
 
