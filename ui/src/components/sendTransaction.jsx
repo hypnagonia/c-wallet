@@ -18,8 +18,10 @@ export const SendTransaction = () => {
 
         setLoading(true)
         const run = async () => {
-            const transactionHash = await api.send(recipient, amount, data)
-            setResult(transactionHash)
+            try {
+                const transactionHash = await api.send(recipient, amount, data)
+                setResult(transactionHash)
+            } catch (e) { }
             setLoading(false)
         }
 
