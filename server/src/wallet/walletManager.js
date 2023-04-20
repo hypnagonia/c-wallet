@@ -6,7 +6,8 @@ const walletManager = (config, logger, storage) => {
     if (!config.passphraseSalt) {
         throw new Error('passphrase salt is not set')
     }
-
+    
+    // todo would be great to have an input from user here (wallet's password) to increase randomness
     const getPassphrase = (userId) => {
         return config.passphraseSalt + userId
     }
