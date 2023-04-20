@@ -9,23 +9,26 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <header className="App-header">
+        <div className="App-header">
+          <div className="box textcenter title">
+            <b>WALLET</b>
+          </div>
+
           <div className="main">
             <Wallet />
             <Routes>
               <Route index path="/send" element={<SendTransaction />} />
               <Route index path="/sign" element={<SignPayload />} />
               <Route index path="/" element={null} />
-
             </Routes>
           </div>
-          <div className="box">
+          <div className="box textcenter">
             <span className="small">
               using Harmony testnet RPC,<br /> top up your wallet at&nbsp;
               <a href="https://faucet.pops.one/" target="_blank"> https://faucet.pops.one/</a>
             </span>
           </div>
-        </header>
+        </div>
       </BrowserRouter>
     </div>
   )

@@ -40,8 +40,8 @@ export const Wallet = () => {
 
     if (!isAuthorized) {
         return <>
-            <div>
-                <a href={`${backendUrl}/auth/google`}>
+            <div className="textcenter">
+                <a href={`${backendUrl}/auth/google`} className="nounderline">
                     Sign In with Google
                 </a>
             </div>
@@ -49,33 +49,18 @@ export const Wallet = () => {
     }
 
     return (
-        <div className="App">
-            <div className="box">
-                Wallet
+        <div>
+            <div className="box small">
+                Wallet: {wallet}<br />
+                Balance: <b>{displayedBalance}</b>&nbsp;ETH<br />
                 <br />
-                <span className="small">
-                    {wallet}
-                </span>
-            </div>
-            <div className="box">
-                Balance
-                <br />
-                <span className="small">
-                    {displayedBalance}&nbsp;ETH
-                </span>
-            </div>
-            <div >
                 <Link to={'/sign'}>
-                    <button>Sign Data</button>
+                    <a href="#">Sign Data</a><br />
                 </Link>
-            </div>
-            <div>
                 <Link to={'/send'}>
-                    <button>Send Transaction</button>
+                    <a href="#">Send Transaction</a><br />
                 </Link>
-            </div>
-            <div>
-                <button onClick={api.logout}>Log out</button>
+                <a href="#" onClick={api.logout}>Log Out</a>
             </div>
         </div>
     )

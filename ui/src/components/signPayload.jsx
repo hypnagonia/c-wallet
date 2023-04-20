@@ -21,26 +21,21 @@ export const SignPayload = () => {
     if (signature) {
         return <>
             <div className="box small">
-                Signature<br/>
-                {signature}
-            </div>
-            <div>
-                <Link to={'/'}>
-                    <button>Back</button>
-                </Link>
+                Signature:<br />
+                <b>{signature}</b>
+                <div>
+                    <Link to={'/'}>
+                        <button className="margintop">Back</button>
+                    </Link>
+                </div>
             </div>
         </>
     }
 
     return (<>
-        <div className="box">
-            Sign Data
-        </div>
-        <div >
+        <div className="small box">
             <textarea placeholder="Data" onChange={handleChange} value={data} />
-        </div>
-        <div>
-            <button onClick={onSign}>Sign</button>
+            <button className="margintop" onClick={onSign}>Sign</button>
         </div>
     </>
     )

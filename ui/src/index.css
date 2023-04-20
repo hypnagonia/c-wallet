@@ -16,17 +16,6 @@ a {
   color: white;
 }
 
-input, textarea {
-  width: 430px;
-	appearance: none;
-	border: none;
-	box-shadow: none;
-	padding: 0.5em 0.5em;
-	display: inline-block;
-	cursor: pointer;
-	border-radius: 0.25rem;
-	font-weight: 600;
-  outline: none;
-  margin: 10px;
-  font-size: 18px;
+.nounderline {
+  text-decoration: none;
 }

@@ -33,11 +33,11 @@ export const SendTransaction = () => {
     if (result) {
         return <>
             <div className="box small">
-                Transaction Hash<br />
-                {result}<br />
+                Transaction Hash:<br />
+                <b>{result}</b><br />
                 <a href={getBlockExplorerTransactionLink(result)} target='_blank'>See on block explorer</a>
             </div>
-            <div>
+            <div className="box small">
                 <Link to={'/'}>
                     <button>Back</button>
                 </Link>
@@ -46,14 +46,11 @@ export const SendTransaction = () => {
     }
 
     return (
-        <div className="App">
-            <div className="box">
-                Send Transaction
-            </div>
+        <div className="box">
             <div >
                 <input placeholder="Recipient" value={recipient} onChange={handleChange(setRecipient)} />
             </div>
-            <div >
+            <div className="margintop">
                 <input placeholder="Amount" value={amount} onChange={handleChange(setAmount)} />
             </div>
             {/*
@@ -61,7 +58,7 @@ export const SendTransaction = () => {
             <div >
                 <textarea placeholder="Hex Data" value={data} onChange={handleChange(setData)} />
             </div>*/}
-            {!loading && <div>
+            {!loading && <div className="margintop">
                 <button onClick={onSend}>Send</button>
             </div>}
         </div>

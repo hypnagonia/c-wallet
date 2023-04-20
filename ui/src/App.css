@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -31,6 +31,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -47,17 +48,51 @@
 }
 
 button {
+  appearance: none;
+  border: none;
+  box-shadow: none;
+  padding: 0.5em 1em;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  color: white;
+  background-color: cadetblue;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+input, textarea {
+  width: 450px;
 	appearance: none;
 	border: none;
 	box-shadow: none;
-	padding: 0.5em 1em;
+	padding: 0.5em 0.5em;
 	display: inline-block;
 	cursor: pointer;
 	border-radius: 0.25rem;
 	font-weight: 600;
-  color: white;
-	background-color: cadetblue;
-	white-space: nowrap;
-  font-size: 18px;
-  margin: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+.main {
+  border: 1px solid #0e0f10;
+  min-height: 400px;
+  padding: 40px;
+  width: 500px;
+  border-radius: 10px;
+  background-color: #191b1e;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.margintop {
+  margin-top: 10px;
+}
+
+.title {
+  margin-top: 40px;
 }
