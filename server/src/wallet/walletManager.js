@@ -6,7 +6,6 @@ note
 wallet manager is blockchain agnostic and knows less as possible about platform specifics
 glues storage, encryption, wallet, and normalized inputs from api controllers
 */
-
 const walletManager = (config, logger, storage) => {
     // note could use amazon kms or so, to keep in memory only and not on disk
     if (!config.passphraseSalt) {

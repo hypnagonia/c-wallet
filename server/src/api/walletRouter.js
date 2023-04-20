@@ -1,4 +1,5 @@
-const { Response, Request, Router, NextFunction } = require('express')
+const { Router } = require('express')
+const { catchAsync } = require('./util')
 
 const walletRouter = (logger, wallet) => {
     const walletRouter = Router({ mergeParams: true })
@@ -47,15 +48,15 @@ const walletRouter = (logger, wallet) => {
     }
 
     // todo why dont i make all of them post and not get
-    walletRouter.get('/balance', getBalance)
+    walletRouter.get('/balance', catchAsync(getBalance))
     // todo must be post
-    walletRouter.get('/create', createWallet)
+    walletRouter.get('/create', catchAsync(createWallet))
     // todo must be post
-    walletRouter.get('/sign', signPayload)
+    walletRouter.get('/sign', catchAsync(signPayload))
     // todo must be post
-    walletRouter.get('/send', sendTransaction)
+    walletRouter.get('/send', catchAsync(sendTransaction))
     // to do replace id with auth
-    walletRouter.get('/', getWallet)
+    walletRouter.get('/', catchAsync(getWallet))
 
     return walletRouter
 }
