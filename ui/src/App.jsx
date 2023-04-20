@@ -25,7 +25,8 @@ function App() {
           <div className="box textcenter">
             <span className="small">
               Using Harmony testnet RPC by default,<br /> top up your wallet at&nbsp;
-              <a href="https://faucet.pops.one/" target="_blank"> https://faucet.pops.one</a>
+              <a href="https://faucet.pops.one/" target="_blank"> https://faucet.pops.one</a><br/>
+              To prune the database and start anew, delete the <b>server/db</b> folder
             </span>
           </div>
         </div>
