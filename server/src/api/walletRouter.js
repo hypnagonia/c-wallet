@@ -18,7 +18,6 @@ const walletRouter = (logger, wallet) => {
     const createWallet = async (req, res, next) => {
         const userId = 'abc'
         const w = await wallet.createWallet(userId)
-
         res.json({ wallet: w })
     }
 

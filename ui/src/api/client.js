@@ -15,7 +15,6 @@ export async function getBalance() {
 
 export async function getWallet() {
 	const res = await fetch(`${backendUrl}/`, options).then(r => r.json())
-	console.log({ res })
 	return res.wallet
 }
 
@@ -31,6 +30,10 @@ export async function send(recipient, amount, data) {
 	return res.transactionHash
 }
 
+export async function createWallet() {
+	const res = await fetch(`${backendUrl}/create`,options).then(r => r.json())
+	return res.wallet
+}
 
 
 

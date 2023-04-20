@@ -18,7 +18,8 @@ export const Wallet = () => {
 
     useEffect(() => {
         const run = async () => {
-            const w = await api.getWallet()
+            // todo it's create or get now
+            const w = await api.createWallet()
             setWallet(w)
         }
 
