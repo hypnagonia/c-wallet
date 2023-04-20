@@ -8,12 +8,19 @@ export const SendTransaction = () => {
     const [data, setData] = useState('')
     const [amount, setAmount] = useState('1')
     const [recipient, setRecipient] = useState('')
+    const [loading, setLoading] = useState(false)
     const [result, setResult] = useState('')
 
     const onSend = useCallback(() => {
+        if (loading) {
+            return
+        }
+
+        setLoading(true)
         const run = async () => {
             const transactionHash = await api.send(recipient, amount, data)
             setResult(transactionHash)
+            setLoading(false)
         }
 
         run()
@@ -54,9 +61,9 @@ export const SendTransaction = () => {
             <div >
                 <textarea placeholder="Hex Data" value={data} onChange={handleChange(setData)} />
             </div>*/}
-            <div>
+            {!loading && <div>
                 <button onClick={onSend}>Send</button>
-            </div>
+            </div>}
         </div>
     )
 }

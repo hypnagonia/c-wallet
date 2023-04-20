@@ -1,13 +1,14 @@
 const { Router } = require('express')
 const { catchAsync } = require('./util')
 
+// todo validation?
 const walletRouter = (logger, wallet) => {
     const walletRouter = Router({ mergeParams: true })
 
     const getBalance = async (req, res, next) => {
         const userId = req.user
         
-        // note it is go-through query, nice to cache for short time
+        // todo it is go-through query, nice to cache for short time
         const balance = await wallet.getBalance(userId)
 
         res.json({ balance })

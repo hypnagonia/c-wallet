@@ -21,6 +21,7 @@ const ethereumWallet = (config, logger) => {
     }
 
     const sign = async (privateKey, payload) => {
+        // todo hex string payload?
         const w = new ethers.Wallet(privateKey)
         const bytes = ethers.toUtf8Bytes(payload)
         const digest = ethers.keccak256(bytes)

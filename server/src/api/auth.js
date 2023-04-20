@@ -1,13 +1,14 @@
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 passport.serializeUser((user, cb) => {
     cb(null, user)
 })
 
-passport.deserializeUser((obj, cb) => {
-    cb(null, obj)
+passport.deserializeUser((o, cb) => {
+    cb(null, o)
 })
 
 const auth = (api, config) => {
@@ -21,7 +22,6 @@ const auth = (api, config) => {
         return done(null, payload.userId)
     }))
 
-    const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
     passport.use(
         new GoogleStrategy(
             {

@@ -37,7 +37,6 @@ const processResponse = (r) => {
 
 export async function getBalance() {
 	const res = await fetch(`${apiUrl}/balance`, options).then(processResponse)
-
 	return res.balance
 }
 
