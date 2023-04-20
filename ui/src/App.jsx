@@ -24,8 +24,8 @@ function App() {
           </div>
           <div className="box textcenter">
             <span className="small">
-              using Harmony testnet RPC,<br /> top up your wallet at&nbsp;
-              <a href="https://faucet.pops.one/" target="_blank"> https://faucet.pops.one/</a>
+              Using Harmony testnet RPC by default,<br /> top up your wallet at&nbsp;
+              <a href="https://faucet.pops.one/" target="_blank"> https://faucet.pops.one</a>
             </span>
           </div>
         </div>
