@@ -102,7 +102,7 @@ dist
 .idea
 .vscode
 *.iml
-.env
+
 db
 testdb
 

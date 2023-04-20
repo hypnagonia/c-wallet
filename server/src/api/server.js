@@ -2,6 +2,7 @@ const express = require('express')
 const http = require('http')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const { auth } = require('./auth')
 const { walletRouter } = require('./walletRouter')
 
 // todo
@@ -9,9 +10,13 @@ const { walletRouter } = require('./walletRouter')
 // validate inputs
 // auth guard
 
-const server = async (apiConfig, logger, wallet) => {
+const server = async (config, logger, wallet) => {
     const l = logger(module, 'api')
     const api = express()
+
+    const passport = auth(api, config.auth)
+    const authGuard = passport.authenticate('jwt', { session: false })
+
     api.use(cors())
     api.use(bodyParser.json())
     api.disable('x-powered-by')
@@ -20,12 +25,12 @@ const server = async (apiConfig, logger, wallet) => {
         next()
     })
 
-    api.use('/api', walletRouter(logger, wallet))
+    api.use('/api', authGuard, walletRouter(logger, wallet))
 
     const close = () => server.close()
 
-    const server = http.createServer(api).listen(apiConfig.port, () => {
-        l.info(`API is up at http://localhost:${apiConfig.port}`)
+    const server = http.createServer(api).listen(config.port, () => {
+        l.info(`API is up at http://localhost:${config.port}`)
     })
 
 

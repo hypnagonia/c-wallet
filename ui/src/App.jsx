@@ -4,19 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Wallet } from './components/Wallet'
 import { SendTransaction } from './components/sendTransaction'
 import { SignPayload } from './components/signPayload'
-import { DynamicContextProvider, DynamicWidget } from '@dynamic-labs/sdk-react'
 
 function App() {
   return (
     <div className="App">
-      <DynamicContextProvider
-        settings={{
-          environmentId: '63b3c595-5f33-451f-9391-fa343962c6a3',
-        }}>
-        <DynamicWidget />
-      </DynamicContextProvider>
       <BrowserRouter>
-
         <header className="App-header">
           <div className="main">
             <Wallet />

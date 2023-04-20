@@ -1,6 +1,6 @@
 node version used v18.12.1
 
-create `.env` in the root, use `.env.example` as reference
+`.env` in the root, intentionally not in gitignore
 
 install
 ```

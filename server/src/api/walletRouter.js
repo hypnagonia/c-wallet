@@ -5,8 +5,8 @@ const walletRouter = (logger, wallet) => {
     const walletRouter = Router({ mergeParams: true })
 
     const getBalance = async (req, res, next) => {
-        const userId = 'abc'
-
+        const userId = req.user
+        
         // note it is go-through query, nice to cache for short time
         const balance = await wallet.getBalance(userId)
 
@@ -14,13 +14,13 @@ const walletRouter = (logger, wallet) => {
     }
 
     const createWallet = async (req, res, next) => {
-        const userId = 'abc'
+        const userId = req.user
         const w = await wallet.createWallet(userId)
         res.json({ wallet: w })
     }
 
     const signPayload = async (req, res, next) => {
-        const userId = 'abc'
+        const userId = req.user
         const { payload } = req.body
         const signature = await wallet.signPayload(userId, payload)
 
@@ -28,14 +28,14 @@ const walletRouter = (logger, wallet) => {
     }
 
     const getWallet = async (req, res, next) => {
-        const userId = 'abc'
+        const userId = req.user
         const w = await wallet.getWallet(userId)
 
         res.json({ wallet: w })
     }
 
     const sendTransaction = async (req, res, next) => {
-        const userId = 'abc'
+        const userId = req.user
         const { recipient, amount, payload } = req.body
         const transactionHash = await wallet.sendTransaction(userId, amount, recipient, payload)
 

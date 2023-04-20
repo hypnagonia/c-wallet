@@ -14,7 +14,15 @@ const getConfig = (envPath) => {
         },
         api: {
             port: +process.env.API_PORT || 3001,
-            auth: {}
+            auth: {
+                jwtSecret: process.env.JWT_SECRET,
+                frontendCallbackUrl: process.env.FRONTEND_URL,
+                google: {
+                    clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+                    clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+                    callbackURL: process.env.GOOGLE_AUTH_CALLBACK_URL,
+                }
+            }
         },
         storage: {
             location: './db',

@@ -25,11 +25,14 @@ const walletManager = (config, logger, storage) => {
     }
 
     const createWallet = async (userId) => {
-        const savedWallet = getWallet(userId)
-        if (savedWallet) {
-            return savedWallet
+        try {
+            const savedWallet = await getWallet(userId)
+            if (savedWallet) {
+                return savedWallet
+            }
+        } catch (e) {
         }
-        
+
         const w = wallet.createWallet()
         const address = w.address
         const passphrase = getPassphrase(userId)
