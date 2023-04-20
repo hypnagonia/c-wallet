@@ -29,14 +29,13 @@ const ethereumWallet = (config, logger) => {
         return signature
     }
 
-    const sendTransaction = async (privateKey, amount, recipient, payload = '') => {
+    const sendTransaction = async (privateKey, amount, recipient, payload = '0x') => {
         if (!ethers.isAddress(recipient)) {
             throw new Error(`ethereum hex address expected, got ${recipient}`)
         }
 
         const w = new ethers.Wallet(privateKey, rpcClient)
 
-        const data = ethers.hexlify(payload)
         // todo estimate gas price
         const transaction = {
             gasLimit: config.gasLimit,

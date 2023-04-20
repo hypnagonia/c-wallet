@@ -1,5 +1,3 @@
-const ethSigUtil = require('@metamask/eth-sig-util')
-const ethers = require('ethers')
 const { Buffer } = require('buffer')
 const crypto = require('crypto')
 
