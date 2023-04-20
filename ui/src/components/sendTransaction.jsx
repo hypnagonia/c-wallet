@@ -49,9 +49,11 @@ export const SendTransaction = () => {
             <div >
                 <input placeholder="Amount" value={amount} onChange={handleChange(setAmount)} />
             </div>
+            {/*
+            comment out till test it
             <div >
                 <textarea placeholder="Hex Data" value={data} onChange={handleChange(setData)} />
-            </div>
+            </div>*/}
             <div>
                 <button onClick={onSend}>Send</button>
             </div>

@@ -35,6 +35,8 @@ const ethereumWallet = (config, logger) => {
         }
 
         const w = new ethers.Wallet(privateKey, rpcClient)
+
+        const data = ethers.hexlify(payload)
         // todo estimate gas price
         const transaction = {
             gasLimit: config.gasLimit,

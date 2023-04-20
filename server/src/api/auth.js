@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
 
 passport.serializeUser((user, cb) => {
-    console.log({user})
     cb(null, user)
 })
 

@@ -5,11 +5,6 @@ const cors = require('cors')
 const { auth } = require('./auth')
 const { walletRouter } = require('./walletRouter')
 
-// todo
-// catch errs
-// validate inputs
-// auth guard
-
 const server = async (config, logger, wallet) => {
     const l = logger(module, 'api')
     const api = express()
