@@ -22,13 +22,11 @@ const server = async (config, logger, wallet) => {
 
     api.use('/api', authGuard, walletRouter(logger, wallet))
 
-    const close = () => server.close()
-
     const server = http.createServer(api).listen(config.port, () => {
         l.info(`API is up at http://localhost:${config.port}`)
     })
 
-
+    const close = () => server.close()
     return close
 }
 

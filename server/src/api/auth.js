@@ -18,7 +18,6 @@ const auth = (api, config) => {
     }
 
     passport.use(new JwtStrategy(jwtOptions, (payload, done) => {
-        // Check if the token is valid and retrieve the user object from the database or session
         return done(null, payload.userId)
     }))
 
@@ -31,11 +30,7 @@ const auth = (api, config) => {
                 callbackURL: config.google.callbackURL
             },
             (accessToken, refreshToken, profile, done) => {
-                const run = async () => {
-                    done(null, profile.id)
-                }
-
-                run()
+                done(null, profile.id)
             }
         ))
 
@@ -49,7 +44,7 @@ const auth = (api, config) => {
             res.redirect(config.frontendCallbackUrl + `?token=${token}`)
         })
 
-    return passport    
+    return passport
 }
 
 module.exports = {
