@@ -11,9 +11,12 @@ const storageFactory = async (config, logger) => {
         await s.put(walletId, payload)
     }
 
+    const deleteAll = s.deleteAll
+
     return {
         getWallet,
-        saveWallet
+        saveWallet,
+        deleteAll
     }
 }
 

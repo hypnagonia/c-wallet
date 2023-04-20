@@ -13,7 +13,7 @@ const getConfig = (envPath) => {
             gasPrice: 100
         },
         api: {
-            port: +process.env.API_PORT || 3000,
+            port: +process.env.API_PORT || 3001,
             auth: {}
         },
         storage: {

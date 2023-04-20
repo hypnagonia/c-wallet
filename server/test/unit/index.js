@@ -1,2 +1,0 @@
-// create wallet
-// check wallet

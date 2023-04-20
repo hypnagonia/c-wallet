@@ -19,9 +19,12 @@ const levelStorage = async (config, logger) => {
         return await db.put(key, value)
     }
 
+    const deleteAll = async () => await db.clear()
+
     return {
         get,
-        put
+        put,
+        deleteAll
     }
 }
 
