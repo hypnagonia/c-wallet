@@ -1,6 +1,6 @@
 const { getConfig } = require('./config')
 const { createLoggerFactory } = require('./logger')
-const { server: apiServer } = require('./api/server')
+const { server: apiServer } = require('./frontend/api/server')
 const { walletManager } = require('./wallet/walletManager')
 const { storageFactory } = require('./storage')
 

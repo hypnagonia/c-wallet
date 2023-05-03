@@ -32,7 +32,8 @@ const getConfig = (envPath) => {
             createIfMissing: true
         },
         logger: {
-            levels: ['error', 'info', 'warn', 'debug']
+            levels: ['error', 'info', 'warn', 'debug'],
+            showTimestamp: false
         }
     }
 

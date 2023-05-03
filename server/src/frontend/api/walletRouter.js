@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { catchAsync, isAddress, isAmount, isPayload, internalError } = require('./util')
+const { catchAsync, isAddress, isAmount, isPayload, internalError } = require('../util')
 
 // todo better error handling
 const walletRouter = (logger, wallet) => {
