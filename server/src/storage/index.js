@@ -1,7 +1,7 @@
 const { levelStorage } = require('./level/level')
-const ethers = require('ethers')
+const { toKeccak256 } = require('../util/hash')
 
-const generateKey = key => ethers.keccak256(ethers.toUtf8Bytes(key.toString()))
+const generateKey = key => toKeccak256(key)
 
 const storageFactory = async (config, logger) => {
     const s = await levelStorage(config, logger)

@@ -5,7 +5,7 @@ const colorize = require('json-colorizer')
 const handler = config => logMessage => {
     if (typeof logMessage.message === 'object') {
         logMessage.message = colorize(JSON.stringify(logMessage.message, null, 2))
-    }
+    } 
 
     const date = new Date().toISOString()
 

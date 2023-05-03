@@ -1,6 +1,6 @@
 const { Command } = require('commander')
 
-const encryptCli = (logger, encrypt, decrypt) => {
+const encryptCli = (logger, encrypt, decrypt, toKeccak256) => {
     const l = logger(module)
     const program = new Command('crypto')
 
@@ -30,6 +30,19 @@ const encryptCli = (logger, encrypt, decrypt) => {
                 l.error(e.message)
             }
 
+        })
+
+    program.command('keccak256')
+        .description('To keccak256')
+        .argument('<value...>', 'values')
+        .action(async (values) => {
+            try {
+                const v = values.reduce((a, b) => a + b, '')
+                const result = toKeccak256(v)
+                l.info(result)
+            } catch (e) {
+                l.error(e.message || e)
+            }
         })
 
     return program

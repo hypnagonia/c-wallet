@@ -1,11 +1,12 @@
 const { encrypt, decrypt } = require('../../util/encryption')
+const { toKeccak256 } = require('../../util/hash')
 const { createLoggerFactory } = require('../../logger')
 const { getConfig } = require('../../config')
 const { encryptCli } = require('./encrypt')
 const { Command } = require('commander')
 
 /*
-npm run cli crypto decrypt -- -h
+./cli.sh crypto decrypt -h
 */
 const run = async () => {
     const config = getConfig()
@@ -14,11 +15,11 @@ const run = async () => {
     
     const program = new Command()
     program
-        .name('encryption command')
-        .description('encrypt and decrypt data using util/encryption')
+        .name('CLI')
+        .description('wallets, crypto and storage')
         .version('1')
 
-    program.addCommand(encryptCli(logger, encrypt, decrypt))
+    program.addCommand(encryptCli(logger, encrypt, decrypt, toKeccak256))
 
 
     try {
@@ -26,6 +27,7 @@ const run = async () => {
     } catch (e) {
         console.log('e')
         l.error(e)
+        process.exit(1)
     }
 }
 
