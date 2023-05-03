@@ -3,8 +3,9 @@ const { toKeccak256 } = require('../../util/hash')
 const { createLoggerFactory } = require('../../logger')
 const { getConfig } = require('../../config')
 const { encryptCli } = require('./encrypt')
+const { ethereumWalletCli } = require('./ethereumWallet')
 const { Command } = require('commander')
-
+const { ethereumWallet } = require('../../wallet/ethereum/wallet')
 /*
 ./cli.sh crypto decrypt -h
 */
@@ -12,7 +13,7 @@ const run = async () => {
     const config = getConfig()
     const logger = createLoggerFactory(config.logger)
     const l = logger(module)
-    
+
     const program = new Command()
     program
         .name('CLI')
@@ -21,6 +22,8 @@ const run = async () => {
 
     program.addCommand(encryptCli(logger, encrypt, decrypt, toKeccak256))
 
+    const ew = ethereumWallet(config.wallet, logger)
+    program.addCommand(ethereumWalletCli(logger, ew))
 
     try {
         program.parse(process.argv)

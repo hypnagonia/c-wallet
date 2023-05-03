@@ -1,8 +1,8 @@
 const signPayloadMock = [
     {
-        privateKey: '0xac8d032d8d9d0a3b62aebb9a47f85b41caeac99df8912b0948287ec606edb2f4',
-        payload: 'abc',
-        result: '0x543d63d22815c4d2d515cfe4d44c45f64dea28d07fca33e127769452c9f33902724052333cc3b9f1de1c50d4e121918c41fab870cf1e730d96b7f0749f87814d1c'
+        privateKey: '0x25c1df21c7137410c3f5e231d5740e9962960c97d9ffbd1ef56cabec9cc8cd93',
+        payload: '1',
+        result: '0x12029cab042f6e9edd6aec8548f4750f292706fe6a55ba8059f0a3ffe3f3ef5010c9f2b85c9370e89074b10ae72f329f37d5bb8c26e91a85b36b4e7232b207dd1b'
     }
 ]
 

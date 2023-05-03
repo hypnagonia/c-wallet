@@ -2,13 +2,13 @@ const ethers = require('ethers')
 
 const ethereumWallet = (config, logger) => {
     const rpcClient = new ethers.JsonRpcProvider(config.rpc.url)
+    const l = logger(module)
 
     const createWallet = () => {
         const wallet = ethers.Wallet.createRandom()
-        // delete as we are never going to use it in the future
-        delete wallet.mnemonic
-
-        return { address: wallet.address, privateKey: wallet.privateKey }
+        // add privateKey to payload
+        l.warn(`Sensitive data generated`)
+        return { ...wallet, privateKey: wallet.privateKey }
     }
 
     const getBalance = async (address) => {
@@ -23,11 +23,22 @@ const ethereumWallet = (config, logger) => {
     const sign = async (privateKey, payload) => {
         // todo hex string payload?
         const w = new ethers.Wallet(privateKey)
-        const bytes = ethers.toUtf8Bytes(payload)
-        const digest = ethers.keccak256(bytes)
-        const signature = await w.signMessage(digest)
-
+        const hash = ethers.hashMessage(payload)
+        
+        const signature = await w.signMessage(hash)
         return signature
+    }
+
+    const verifySignature = async (address, payload, signature) => {
+        if (!ethers.isAddress(address)) {
+            throw new Error(`Invalid ethereum hex address, got ${address}`)
+        }
+
+        const hash = ethers.hashMessage(payload)
+
+        const recoveredAddress = ethers.verifyMessage(hash, signature)
+
+        return address === recoveredAddress
     }
 
     const sendTransaction = async (privateKey, amount, recipient, payload = '0x') => {
@@ -45,7 +56,7 @@ const ethereumWallet = (config, logger) => {
             value: ethers.parseEther(amount),
             data: payload
         }
-        
+
         const res = await w.sendTransaction(transaction)
         return res.hash
     }
@@ -54,7 +65,8 @@ const ethereumWallet = (config, logger) => {
         createWallet,
         getBalance,
         sign,
-        sendTransaction
+        sendTransaction,
+        verifySignature
     }
 }
 
