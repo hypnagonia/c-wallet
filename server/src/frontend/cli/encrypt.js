@@ -2,9 +2,10 @@ const { Command } = require('commander')
 
 const encryptCli = (logger, encrypt, decrypt, toKeccak256) => {
     const l = logger(module)
-    const program = new Command('crypto')
+    const program = new Command('crypto').alias('c')
 
     program.command('encrypt')
+        .alias('e')
         .description('Encrypt data')
         .argument('<password>', 'password')
         .argument('<payload>', 'payload')
@@ -13,10 +14,10 @@ const encryptCli = (logger, encrypt, decrypt, toKeccak256) => {
         .action(async (password, payload, options) => {
             const encrypted = await encrypt(password, payload)
             l.info(encrypted)
-
         })
 
     program.command('decrypt')
+        .alias('d')
         .description('Decrypt data')
         .argument('<password>', 'password')
         .argument('<salt>', 'salt')

@@ -14,16 +14,34 @@ const run = async () => {
     const logger = createLoggerFactory(config.logger)
     const l = logger(module)
 
+    const output = {
+        writeOut: s => l.info(s),
+        writeErr: s => l.error(s),
+        outputError: (str, write) => write(str)
+    }
+
     const program = new Command()
     program
         .name('CLI')
         .description('wallets, crypto and storage')
         .version('1')
-
-    program.addCommand(encryptCli(logger, encrypt, decrypt, toKeccak256))
+        .allowExcessArguments(false)
 
     const ew = ethereumWallet(config.wallet, logger)
-    program.addCommand(ethereumWalletCli(logger, ew))
+
+    const subCommands = [
+        encryptCli(logger, encrypt, decrypt, toKeccak256),
+        ethereumWalletCli(logger, ew)
+    ]
+
+    subCommands.forEach(c => {
+        program.addCommand(
+            c.configureOutput(output)
+
+        )
+    })
+
+    program.configureOutput(output)
 
     try {
         program.parse(process.argv)
