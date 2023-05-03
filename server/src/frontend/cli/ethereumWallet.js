@@ -1,6 +1,6 @@
 const { Command } = require('commander')
 
-const ethereumWalletCli = (logger, ethereumWallet) => {
+const ethereumWalletCli = (config, logger, ethereumWallet) => {
     const l = logger(module)
     const program = new Command('eth-wallet').alias('e')
 
@@ -24,16 +24,24 @@ const ethereumWalletCli = (logger, ethereumWallet) => {
 
         })
 
+    // todo network    
+    program.command('balance')
+        .alias('b')
+        .description('Get balance')
+        .argument('<Address>', 'Address')
+        .action(async (address) => {
+            l.info(`RPC: ${config.rpc.url}`)
+            const balance = await ethereumWallet.getBalance(address)
+            l.info({ balance })
+
+        })
+
     program.command('verify-signature')
         .alias('v')
         .description('Verify if payload was signed by the given address')
         .argument('<Address>', 'Address')
         .argument('<Payload>', 'Payload')
-        .argument('<Signature>', 'Signature');
-        
-        program.on('command:*', function () {
-            console.log('shit')
-          })
+        .argument('<Signature>', 'Signature')
         .action(async (address, payload, signature) => {
             try {
                 const isVerified = await ethereumWallet.verifySignature(address, payload, signature)

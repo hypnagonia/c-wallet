@@ -31,7 +31,7 @@ const run = async () => {
 
     const subCommands = [
         encryptCli(logger, encrypt, decrypt, toKeccak256),
-        ethereumWalletCli(logger, ew)
+        ethereumWalletCli(config.wallet,logger, ew)
     ]
 
     subCommands.forEach(c => {

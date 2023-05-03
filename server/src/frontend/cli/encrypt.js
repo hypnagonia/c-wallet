@@ -34,6 +34,7 @@ const encryptCli = (logger, encrypt, decrypt, toKeccak256) => {
         })
 
     program.command('keccak256')
+        .alias('h')
         .description('To keccak256')
         .argument('<value...>', 'values')
         .action(async (values) => {
