@@ -2,7 +2,7 @@ const { Command } = require('commander')
 
 const ethereumWalletCli = (config, logger, ethereumWallet) => {
     const l = logger(module)
-    const program = new Command('eth-wallet').alias('e')
+    const program = new Command('eth-wallet').alias('w')
 
     program.command('new')
         .alias('n')

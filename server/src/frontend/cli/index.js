@@ -4,6 +4,8 @@ const { createLoggerFactory } = require('../../logger')
 const { getConfig } = require('../../config')
 const { encryptCli } = require('./encrypt')
 const { ethereumWalletCli } = require('./ethereumWallet')
+const { ethersCli } = require('./ethers')
+
 const { Command } = require('commander')
 const { ethereumWallet } = require('../../wallet/ethereum/wallet')
 /*
@@ -31,13 +33,13 @@ const run = async () => {
 
     const subCommands = [
         encryptCli(logger, encrypt, decrypt, toKeccak256),
-        ethereumWalletCli(config.wallet,logger, ew)
+        ethereumWalletCli(config.wallet, logger, ew),
+        ethersCli(config.wallet, logger)
     ]
 
     subCommands.forEach(c => {
         program.addCommand(
             c.configureOutput(output)
-
         )
     })
 
@@ -46,7 +48,6 @@ const run = async () => {
     try {
         program.parse(process.argv)
     } catch (e) {
-        console.log('e')
         l.error(e)
         process.exit(1)
     }
